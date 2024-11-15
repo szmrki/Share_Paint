@@ -1,0 +1,37 @@
+<!DOCYPE html>
+<html lang="ja"> 
+    <head>
+        <meta charset="utf-8">
+        <title>Paint History</title>
+    </head>
+    <body>
+        <h1> Hello, <%= @user%>!<br>Welcome to Share Paint</h1>
+        <table border>
+            <tr>
+                <td>ID</td>
+                <td>作成者</td>
+                <td>最終更新日時</td>
+                <td>画像</td>
+                <td>削除</td>
+            </tr>
+            <% @list.each do |row| %>
+            <tr>
+                <td><%= row.id %></td>
+                <td><%= row.user %></td>
+                <td><%= row.date %></td>
+                <td>
+                    <a href="<%= row.image_path %>">表示</a>
+                </td> 
+                <td>
+                    <form method="post" action="delete">
+                        <input type="hidden" name="picture" value="<%= row.image_path %>" >
+                        <input type="submit" value="削除">
+                    </form>
+                </td>
+                <!--リンクの埋め込みのためaタグを使用-->
+            </tr>
+            <% end %>
+        </table>
+        
+    </body>
+</html>

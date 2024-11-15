@@ -1,0 +1,48 @@
+<!DOCYPE html>
+<html lang="ja"> 
+    <head>
+        <meta charset="utf-8">
+        <title>Share Paint</title>
+        <link rel="stylesheet" type= "text/css" href= "css/style.css" media="all">
+    </head>
+    <body>
+        <h1> Hello, <%= @user%>!<br>Welcome to Share Paint</h1>
+        <form method="post" action="logout">
+            <input type="submit" id="logout" class="button" value="ログアウト">
+        </form>
+        <table id="container">
+            <tr>
+                <td><h2 id="headline">Canvas<br>Number:&ensp;&ensp;</h2></td>
+                <td><canvas id="canvas" width=600 height=300, style="border:1px solid #000"></canvas></td>
+                <td>
+                    <div id="tools-container">
+                        <table id="pen-choice">
+                            <tr>
+                                <td>ペンの色</td>
+                                <td id="color-choice"><input type="color" id="color" value="000000"></td>
+                            </tr>
+                            <tr>
+                                <td>太さ</td>
+                                <td><input type="range" min="1" max="15" id="thickness" value="1"></td>
+                            </tr>
+                        </table>
+                        <div id="pen-eraser">
+                            <label><input type="radio" name="tool" value="pen" id="pen" checked>ペン</label>
+                            <label><input type="radio" name="tool" value="eraser" id="eraser">消しゴム</label>
+                        </div>
+                        <input type="button" id="post" class="button" value="保存">
+                        <input type="button" id="clear" class="button" value="全削除">
+                        <a href="/history" target="_blank" rel="noopener noreferrer" class="button" id="history-link">
+                            履歴を見る
+                        </a>  
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <script src="https://code.jquery.com/jquery-3.7.1.js" 
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" 
+        crossorigin="anonymous">
+        </script>
+        <script type="text/javascript" src="/js/drawing.js"></script>
+    </body>
+</html>

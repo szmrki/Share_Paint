@@ -1,0 +1,11 @@
+development:
+  adapter: sqlite3
+  database: hatten.db
+  pool: 100000
+  timeout: 5000
+
+production:
+  adapter: sqlite3
+  database: hatten.db
+  pool: 100000
+  timeout: 5000

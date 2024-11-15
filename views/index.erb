@@ -1,0 +1,24 @@
+<!DOCYPE html>
+<html lang="ja"> 
+    <head>
+        <meta charset="utf-8">
+        <title>Login Form</title>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <td>user_id</td>
+                <td>password</td>
+            </tr>
+
+            <form method="post" action="drawing">
+                <tr>
+                    <td><input type="text" name="user"></td>
+                    <td><input type="password" name="password"></td>
+                    <td><input type="submit" value="ログイン"></td>
+                </tr>
+            </form>
+        </table>
+        <p> <%= @msg%> </p>
+    </body>
+</html>
