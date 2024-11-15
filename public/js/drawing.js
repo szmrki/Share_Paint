@@ -60,7 +60,7 @@ $("#clear").click(function() {
 
 //画像を保存し、新しいキャンバスに移る
 $("#post").click(function() {
-    const ws_post = new WebSocket('ws://localhost:4567/post');
+    const ws_post = new WebSocket(`ws://${location.host}/post`);
     ws_post.onopen = function() {
         let post_data = {"msg": "reload", "id": id};
         ws_post.send(JSON.stringify(post_data));
@@ -80,7 +80,7 @@ function White_BG() {
 //websocketを通し、最新の画像データを取得する関数
 function load_websocket() {
     const img = document.createElement('img');
-    const ws = new WebSocket('ws://localhost:4567/drawing');
+    const ws = new WebSocket(`ws://${location.host}/drawing`);
     ws.onopen = function() {
         console.log("open1");
     };
@@ -140,7 +140,7 @@ function load_websocket() {
 function send_websocket() {
     let base64 = canvas.toDataURL("image/jpeg");
     let data = {"image": base64.replace(/^.*,/, ''), "id": id};
-    const ws = new WebSocket('ws://localhost:4567/drawing');
+    const ws = new WebSocket(`ws://${location.host}/drawing`);
     ws.onopen = function() {
         ws.send(JSON.stringify(data));
     };
@@ -158,7 +158,7 @@ function send_websocket() {
 
 //ログインしたことを他のユーザに知らせる。この通信をきっかけとして、キャンバスを同期させる
 function login_websocket() {
-    const ws_login = new WebSocket('ws://localhost:4567/participate');
+    const ws_login = new WebSocket(`ws://${location.host}/participate`);
     ws_login.onopen = function() {
         let login_data = {"msg": "login"};
         ws_login.send(JSON.stringify(login_data));
