@@ -1,2 +1,2 @@
-・ダウンロードして実行する際はpublic/にimagesディレクトリを作成してから実行する
+・ダウンロードして実行する際はpublic/にimagesディレクトリを作成してから実行する\\
 ・RubyのSinatraやWebsocket通信の勉強用
