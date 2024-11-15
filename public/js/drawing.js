@@ -94,7 +94,7 @@ function load_websocket() {
             /*他ユーザがログインした時の処理
             画像データとidを送ってあげる*/
             else if (return_msg == "login") {  
-                console.log("他のユーザがログインしました");
+                alert("他のユーザがログインしました");
                 let base64 = canvas.toDataURL("image/jpeg");
                 let sync_data = {"image": base64.replace(/^.*,/, ''), "id": id};
                 setTimeout(function() {
@@ -146,7 +146,6 @@ function send_websocket() {
     };
     ws.onmessage = function(data) {
         id = JSON.parse(data.data).id;
-        console.log(id)
         headline.innerHTML = `Canvas<br>Number:${id}`;
         setTimeout( ()=> {
             ws.close();

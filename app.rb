@@ -185,9 +185,15 @@ get '/participate' do
                             s.send({"image_path" => "NaN",
                                     "msg" => "login"}.to_json)
                         else   #送り主にはidと画像のパスを送信
-                            s.send({"image_path" => Paint.last.image_path,
+                            if Paint.all.empty?
+                                s.send({"image_path" => "NaN",
                                     "msg" => "login",
-                                    "id" => Paint.last.id}.to_json)
+                                    "id" => -1}.to_json)
+                            else
+                                s.send({"image_path" => Paint.last.image_path,
+                                        "msg" => "login",
+                                        "id" => Paint.last.id}.to_json)
+                            end
                         end
                     end
                 end
