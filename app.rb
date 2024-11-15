@@ -7,8 +7,7 @@ require 'sinatra-websocket'
 require 'json'
 require 'yaml'
 
-#セッションを使えるようにする
-enable :sessions
+enable :sessions  #セッションを有効にする
 
 #websocketを使用するとデータベースのリクエストの上限数を超えてしまう
 #ことがあったため、YAMLで設定を記述、上限数を上げた
@@ -17,8 +16,7 @@ ActiveRecord::Base.establish_connection(
     db_config[settings.environment.to_s]
 )
 
-#websocket用
-set :sockets, []
+set :sockets, []   #websocket用
 
 class User_auth <ActiveRecord::Base
 end
@@ -83,11 +81,18 @@ get '/drawing' do
 
                 else  #2回目以降はidが送られてくる
                     id = data['id']
-                    updated_data = Paint.find(id)
-                    updated_data.update(:date => date) #更新日時をアップデート
                     tmp_id = id
                     id = format("%03d", tmp_id)
                     image_path = "images/paint_#{id}.jpg"
+                    
+                    if !Paint.where(:id => id).empty? 
+                        updated_data = Paint.find(id)
+                        updated_data.update(:date => date) #更新日時をアップデート
+                    else     #編集中のファイルを消されていたとき
+                        Paint.create(:user => @user, 
+                                     :date => date,
+                                     :image_path => image_path)
+                    end
                 end
 
                 #画像を保存する
@@ -129,7 +134,7 @@ post '/logout' do
     redirect '/'
 end
 
-#全削除ボタンを押した際に使用される
+#画像削除ボタンを押した際に使用される
 post '/delete' do
     Paint.find_by(:image_path=>params[:picture]).destroy
     File.delete("./public/#{params[:picture]}")
@@ -185,7 +190,7 @@ get '/participate' do
                             s.send({"image_path" => "NaN",
                                     "msg" => "login"}.to_json)
                         else   #送り主にはidと画像のパスを送信
-                            if Paint.all.empty?
+                            if Paint.all.empty? #DBに何もなければ-1を返す
                                 s.send({"image_path" => "NaN",
                                     "msg" => "login",
                                     "id" => -1}.to_json)
