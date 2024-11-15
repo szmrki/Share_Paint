@@ -1,0 +1,52 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f4f8;;
+}
+
+h1 {
+    margin-top: 50px;
+    font-size: 50px;
+}
+
+.ta {
+    margin: 10px 0;
+    height: 30px;
+    font-size: 20px;
+    border: 1.5px solid #000;
+    border-radius: 8px;
+}
+
+.ta:focus {
+    border-color: #83a2c9;
+    outline: 0;
+}
+
+#submit {
+    margin: 10px 0;
+    cursor: pointer;
+    background-color: #184c92;
+    color: #FFF;
+    font-size: 17.5px;
+    width: 300px;
+    height: 50px;
+    border: 1.5px solid #000;
+    border-radius: 30px;
+}
+
+#submit:hover {
+    text-decoration: underline;
+}
+
+#submit:active {
+    outline: 0;
+    background-color: #004aad;
+}
+
+#msg {
+    font-size: 24px;
+}
+
+#user {
+    margin: 10px auto auto;
+}

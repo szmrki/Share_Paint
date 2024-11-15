@@ -2,17 +2,19 @@
 <html lang="ja"> 
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width", initial-scale="1">
         <title>Paint History</title>
+        <link rel="stylesheet" type= "text/css" href= "css/style.css" media="all">
     </head>
     <body>
-        <h1> Hello, <%= @user%>!<br>Welcome to Share Paint</h1>
-        <table border>
+        <h1 class="head-group"> Hello, <%= @user%>!<br>Welcome to Share Paint</h1>
+        <table border id="history-table">
             <tr>
-                <td>ID</td>
-                <td>作成者</td>
-                <td>最終更新日時</td>
-                <td>画像</td>
-                <td>削除</td>
+                <th>ID</th>
+                <th>作成者</th>
+                <th>最終更新日時</th>
+                <th>画像</th>
+                <th>削除</th>
             </tr>
             <% @list.each do |row| %>
             <tr>
@@ -20,12 +22,12 @@
                 <td><%= row.user %></td>
                 <td><%= row.date %></td>
                 <td>
-                    <a href="<%= row.image_path %>">表示</a>
+                    <a href="<%= row.image_path %>" id="image-link" class="button">画像を表示</a>
                 </td> 
                 <td>
                     <form method="post" action="delete">
                         <input type="hidden" name="picture" value="<%= row.image_path %>" >
-                        <input type="submit" value="削除">
+                        <input type="submit" id="image-clear" class="clear" value="削除">
                     </form>
                 </td>
                 <!--リンクの埋め込みのためaタグを使用-->

@@ -119,8 +119,7 @@ get '/history' do
         @list = Paint.all
         erb :history
     else
-        session[:error] = "ログアウトしました"
-        redirect '/'
+        halt 404
     end
 end
 

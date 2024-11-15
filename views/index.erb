@@ -2,23 +2,17 @@
 <html lang="ja"> 
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width", initial-scale="1">
         <title>Login Form</title>
+        <link rel="stylesheet" type= "text/css" href= "css/index.css" media="all">
     </head>
     <body>
-        <table>
-            <tr>
-                <td>user_id</td>
-                <td>password</td>
-            </tr>
-
-            <form method="post" action="drawing">
-                <tr>
-                    <td><input type="text" name="user"></td>
-                    <td><input type="password" name="password"></td>
-                    <td><input type="submit" value="ログイン"></td>
-                </tr>
-            </form>
-        </table>
-        <p> <%= @msg%> </p>
+        <h1>Share Paint</h1>
+        <form method="post" action="drawing">
+            <input type="text" name="user" id="user" class="ta" placeholder="ユーザー名"><br>
+            <input type="password" name="password" id="pw" class="ta" placeholder="パスワード"><br>
+            <input type="submit" id="submit" value="ログイン">
+        </form>
+        <p id="msg"> <%= @msg%> </p>
     </body>
 </html>

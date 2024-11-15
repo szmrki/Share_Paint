@@ -2,24 +2,30 @@
 <html lang="ja"> 
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width", initial-scale="1">
         <title>Share Paint</title>
         <link rel="stylesheet" type= "text/css" href= "css/style.css" media="all">
     </head>
     <body>
-        <h1> Hello, <%= @user%>!<br>Welcome to Share Paint</h1>
+        <div class="head-group">
+            <h1> Hello, <%= @user%>!<br>Welcome to Share Paint</h1>
+            <h2 id="headline">Canvas<br>Number:&ensp;&ensp;</h2>
+        </div>
         <form method="post" action="logout">
             <input type="submit" id="logout" class="button" value="ログアウト">
         </form>
+        <a href="/history" target="_blank" rel="noopener noreferrer" class="button" id="history-link">
+                            履歴を見る
+        </a>  
         <table id="container">
             <tr>
-                <td><h2 id="headline">Canvas<br>Number:&ensp;&ensp;</h2></td>
                 <td><canvas id="canvas" width=600 height=300, style="border:1px solid #000"></canvas></td>
                 <td>
                     <div id="tools-container">
                         <table id="pen-choice">
                             <tr>
                                 <td>ペンの色</td>
-                                <td id="color-choice"><input type="color" id="color" value="000000"></td>
+                                <td id="color-choice"><input type="color" id="color" value="#000000"></td>
                             </tr>
                             <tr>
                                 <td>太さ</td>
@@ -31,10 +37,8 @@
                             <label><input type="radio" name="tool" value="eraser" id="eraser">消しゴム</label>
                         </div>
                         <input type="button" id="post" class="button" value="保存">
-                        <input type="button" id="clear" class="button" value="全削除">
-                        <a href="/history" target="_blank" rel="noopener noreferrer" class="button" id="history-link">
-                            履歴を見る
-                        </a>  
+                        <input type="button" id="clear" class="button clear" value="全削除">
+                        
                     </div>
                 </td>
             </tr>
