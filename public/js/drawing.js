@@ -12,7 +12,7 @@ const sessionValue = true;
 
 White_BG(); //背景色を白に設定
 
-//初回のみlogin_websocket関数を実行
+//初回のみlogin_websocket関数を実行、ログアウトして再度ログインする際は一旦ブラウザを閉じてからが望ましい
 //sessionstorageにデータがあるかどうかで初回かそうでないか区別
 if (!sessionStorage.getItem(sessionKey)) {
     login_websocket();
@@ -34,11 +34,11 @@ $("#canvas").mousedown(function() {
 
 //描画を行う関数
 function draw(x, y) {
-    ctx.lineWidth = thickness.value;
+    ctx.lineWidth = thickness.value; //ペンの太さを取得
     if (pen.checked) {  //ラジオボタンでペンが選択されていたら
         ctx.strokeStyle = color.value;
     }
-    else ctx.strokeStyle = "#FFFFFF";
+    else ctx.strokeStyle = "#FFFFFF"; //消しゴムは白の重ね塗りで表現
     if (click == 1) {
         click = 2;
         ctx.beginPath();  //準備
@@ -64,11 +64,11 @@ $("#post").click(function() {
     ws_post.onopen = function() {
         let post_data = {"msg": "reload", "id": id};
         ws_post.send(JSON.stringify(post_data));
+        setTimeout(function() {
+            ws_post.close();
+        }, 100);
     }; //reloadという文字列を/postに送る
-      //メッセージを受信した際の処理はload_websocket関数にまとめる(/drawingで処理される)
-    setTimeout(function() {  //すぐにリロードされると通信できなくて困るので遅らせる
-        location.reload(); 
-    }, 1000);
+    //メッセージを受信した際の処理はload_websocket関数にまとめる(/drawingで処理される)
 });
 
 //画像を保存した際の背景色を白にする関数
@@ -88,13 +88,13 @@ function load_websocket() {
         const image_path = JSON.parse(event.data).image_path; // サーバから画像をロード
         if (image_path == "NaN") {
             let return_msg = JSON.parse(event.data).msg;
-            if (return_msg == "reload") {
+            if (return_msg == "reload") { //あるユーザが保存ボタンを押すと他のユーザもリロードされる
                 location.reload();
             }
-            /*他ユーザがログインした時の処理
-            画像データとidを送ってあげる*/
+            //他ユーザがログインした時の処理、画像データとidを送ってあげる
             else if (return_msg == "login") {  
-                alert("他のユーザがログインしました");
+                alert("他のユーザがログインしました"); 
+                //alertのOKを押す前にログインしたユーザが操作すると番号がずれる
                 let base64 = canvas.toDataURL("image/jpeg");
                 let sync_data = {"image": base64.replace(/^.*,/, ''), "id": id};
                 setTimeout(function() {

@@ -47,7 +47,6 @@ end
 
 #描画画面　websocket通信の際に使用される
 get '/drawing' do
-    @title = "Share Paint"
     @user = session[:user]
     date = Modify_time()
     if !request.websocket?
@@ -128,8 +127,9 @@ get '/history' do
     end
 end
 
+#ログアウトのボタンを押したときに使用される
 post '/logout' do
-    session.clear  #ログアウトの際はセッションを切断
+    session.clear  #セッションを切断
     session[:error] = "ログアウトしました"
     redirect '/'
 end
@@ -182,23 +182,11 @@ get '/participate' do
 
             ws.onmessage do |msg|
                 msg = JSON.parse(msg)
-                if msg["msg"] == "login"
-                    
-                    settings.sockets.each do |s|
-                        #送り主以外の全クライアントにログイン通知
-                        if s != ws
+                if msg["msg"] == "login"           
+                    settings.sockets.each do |s|                  
+                        if s != ws  #送り主以外の全クライアントにログイン通知
                             s.send({"image_path" => "NaN",
                                     "msg" => "login"}.to_json)
-                        else   #送り主にはidと画像のパスを送信
-                            if Paint.all.empty? #DBに何もなければ-1を返す
-                                s.send({"image_path" => "NaN",
-                                    "msg" => "login",
-                                    "id" => -1}.to_json)
-                            else
-                                s.send({"image_path" => Paint.last.image_path,
-                                        "msg" => "login",
-                                        "id" => Paint.last.id}.to_json)
-                            end
                         end
                     end
                 end
