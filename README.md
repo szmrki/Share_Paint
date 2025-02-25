@@ -20,6 +20,7 @@
 - WebSocketによるリアルタイム通信
 
 ## ディレクトリ構成
+~~~sh
 .
 ├── Gemfile
 ├── README.md
@@ -38,6 +39,7 @@
     ├── drawing.erb
     ├── history.erb
     └── index.erb
+~~~
 
 ## インストール & セットアップ
 ### 環境
