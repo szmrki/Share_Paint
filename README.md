@@ -62,6 +62,7 @@ bundle install --path=vendor/bundle #Gemfileに追加されたパッケージの
 
 ### ローカル環境での実行
 ~~~sh
+mkdir public/images  #最初の実行時にimagesディレクトリを作成しておく
 bundle exec ruby app.rb
 ~~~
 - localhost:4567でサーバが立ち上がる
