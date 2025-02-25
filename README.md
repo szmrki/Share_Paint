@@ -1,2 +1,3 @@
-・ダウンロードして実行する際はpublic/にimagesディレクトリを作成してから実行する  
-・RubyのSinatraやWebsocket通信の勉強用
+## 概要
+- 異なるブラウザ間でお絵描きを同時に共有するアプリ
+- RubyのSinatraやWebsocket通信の勉強用
